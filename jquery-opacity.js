@@ -2,11 +2,12 @@
   
   var _css, _animate, hijackCallback, hijackArgs;
 
-    if ( ! $.support.opacity ) {
+    if ( ! $.support.opacity && 'filter' in (document.createElement('div')).style ) {
 
       // Callback wrapper that removes filter attribute
       hijackCallback = function( callback ) {
         return function () {
+          var filter = this.style.filter;
           if ( /^(0|1)$/.test( _css.call( $(this), 'opacity' ))) {
             this.style.removeAttribute('filter');
           }
