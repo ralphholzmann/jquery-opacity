@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <style type="text/css">
+      div {
+        height: 20px;
+      }
+    </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-opacity.js"></script>
+    <script type="text/javascript">
+      $(function() {
+
+          var fadeinout = $('#fadeinout'),
+              cssString = $('#cssString'),
+              cssObject = $('#cssObject');
+
+        (function recurse() {
+          setTimeout(function() {
+            fadeinout[ "fade" + ( fadeinout.is(':hidden') ? 'In' : 'Out' ) ]( recurse );
+          }, 1000);
+        })();
+
+        (function callSelf( toggle ) {
+          
+          setTimeout(function() {
+            cssString.css('opacity', toggle ? Math.random() : 1 );
+            cssObject.css({
+              'opacity' : toggle ? Math.random() : 1
+            });
+
+            callSelf( ! toggle );
+          }, 1000);
+        })( true );
+        
+      });
+    </script>
+    <title>IE Opacity Test</title>
+  </head>
+  <body>
+    <h1>jQuery Opacity Tests</h1>
+    <h2>fadeIn, fadeOut</h2>
+    <div>
+      <p id="fadeinout">
+        abcdefghijklmnopqrstuvwxyz
+      </p>
+    </div>
+    <h2>css</h2>
+    <p id="cssString">
+      CSS String
+    </p>
+    <p id="cssObject">
+      CSS Object
+    </p>
+  </body>
+</html>

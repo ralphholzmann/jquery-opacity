@@ -7,7 +7,6 @@
       // Callback wrapper that removes filter attribute
       hijackCallback = function( callback ) {
         return function () {
-          var filter = this.style.filter;
           if ( /^(0|1)$/.test( _css.call( $(this), 'opacity' ))) {
             this.style.removeAttribute('filter');
           }
